@@ -7,7 +7,8 @@ var orderCirculateInit = 0,
 $.fn.sPagination = function(options){
     var defaults = {
         orderPage:1,
-        pageTotal: 0
+        pageTotal: 0,
+        numbers:0
     };
     var setting = $.extend(defaults,options);
     if(setting.pageTotal ==0){
@@ -33,7 +34,7 @@ $.fn.sPagination = function(options){
     //基础样式
     function orderList(defaultPage){
         setting.orderPage = defaultPage;
-        var orderPageStr = '<span style="height:24px;line-height:24px;border:0px;margin-right:10px;">共'+ 12 +'条</span>' +
+        var orderPageStr = '<span style="height:24px;line-height:24px;border:0px;margin-right:10px;">共'+ setting.numbers +'条</span>' +
             '<span id="orderLastPage" class="ishover lastPage">上一页</span>' ;
         var orderIslt_6 ;
         if(setting.pageTotal <= 6){
@@ -147,7 +148,10 @@ $.fn.sPagination = function(options){
     //下一页是否可以点击
     //下一页是否显示
     //点击颜色定制
-    orderList(6);
+    orderList(setting.orderPage);
+    if(setting.orderPage>5){
+        orderList(setting.orderPage);
+    }
 
     this.on('click','.numberPage',function(){
         console.log(this);
